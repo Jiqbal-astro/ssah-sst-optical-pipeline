@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+title: "SSAH SST Optical Data Processing Pipeline"
+abstract: >-
+  A Python pipeline for optical space surveillance and tracking (SST):
+  calibration, dual-track quality control, star-referenced astrometry
+  against Gaia DR3, photometry, kinematic tracklet linking, SGP4/TLE
+  correlation and CCSDS TDM / ADES output.
+type: software
+authors:
+  - family-names: Iqbal
+    given-names: Javed
+    affiliation: "Sharjah Astronomical Observatory (SSAH)"
+version: 2.0.0
+date-released: "2026-11-03"
+license: BSD-3-Clause
+repository-code: "https://github.com/YOUR-GITHUB-USER/ssah-sst-pipeline"
+keywords:
+  - space surveillance and tracking
+  - astrometry
+  - photometry
+  - satellite tracking
+  - SGP4
+  - FITS

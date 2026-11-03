@@ -1,0 +1,68 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ssah-sst-pipeline"
+dynamic = ["version"]
+description = "Optical Space Surveillance and Tracking (SST) data-processing pipeline: calibration, dual-track QC, star-referenced astrometry, photometry, tracklets, TLE correlation, CCSDS TDM output."
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+authors = [{ name = "Javed Iqbal" }]
+keywords = ["space surveillance", "SST", "astrometry", "photometry", "satellite tracking", "SGP4", "FITS"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "astropy>=6.0",
+    "numpy>=1.26",
+    "scipy>=1.11",
+    "sep>=1.2",
+    "photutils>=1.10",
+    "sgp4>=2.22",
+    "astroscrappy>=1.1",
+    "pandas>=2.0",
+    "matplotlib>=3.8",
+    "openpyxl>=3.1",
+    "pyyaml>=6.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/YOUR-GITHUB-USER/ssah-sst-pipeline"
+Documentation = "https://github.com/YOUR-GITHUB-USER/ssah-sst-pipeline/blob/main/docs/manual/SSAH_SST_Pipeline_Manual.pdf"
+Issues = "https://github.com/YOUR-GITHUB-USER/ssah-sst-pipeline/issues"
+Changelog = "https://github.com/YOUR-GITHUB-USER/ssah-sst-pipeline/blob/main/CHANGELOG.md"
+
+[project.optional-dependencies]
+online = ["astroquery>=0.4.7"]            # reference-store downloads (VizieR / ESA Gaia)
+test = ["pytest>=7.4", "skyfield>=1.45"]  # skyfield: independent SGP4 cross-check
+all = ["ssah-sst-pipeline[online,test]"]
+
+[project.scripts]
+sst-pipeline  = "sst_pipeline.pipeline:main"
+sst-refcat    = "sst_pipeline.tools.refcat:main"
+sst-tle       = "sst_pipeline.tools.tle_download:main"
+sst-synthetic = "sst_pipeline.tools.synthetic:main"
+sst-demo      = "sst_pipeline.tools.demo:main"
+
+[tool.setuptools.dynamic]
+version = { attr = "sst_pipeline.__version__" }
+
+[tool.setuptools.packages.find]
+include = ["sst_pipeline*"]
+
+[tool.setuptools.package-data]
+sst_pipeline = ["defaults.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

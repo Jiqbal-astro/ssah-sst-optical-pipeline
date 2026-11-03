@@ -1,0 +1,47 @@
+# =============================================================================
+# SSAH SST Optical Pipeline — site configuration template
+# =============================================================================
+# Copy to e.g. config/ssah_site.yaml, replace every [REQUIRED] value, and run
+#     sst-pipeline FITS_DIR OUT_DIR --config config/ssah_site.yaml
+# Anything not listed here keeps the packaged default (sst_pipeline/defaults.yaml).
+# =============================================================================
+
+instrument:
+  name: "SSAH-CCD-01"
+  gain_e_per_adu: 1.47          # [REQUIRED] camera datasheet / photon-transfer curve
+  read_noise_e: 9.3             # [REQUIRED] camera datasheet
+  saturation_adu: 65535         # [REQUIRED] NON-LINEARITY limit, not the ADC maximum
+  pixel_scale_arcsec: 0.82      # [REQUIRED] 206265 * pixel_size_mm / focal_length_mm
+  aperture_mm: 356.0
+  detector_nx: 4096
+  detector_ny: 4096
+
+site:
+  name: "Sharjah Astronomical Observatory"
+  iau_obs_code: "XXX"           # [REQUIRED for ADES] MPC observatory code, if assigned
+  latitude_deg: 25.3573         # [REQUIRED] surveyed geodetic coordinates
+  longitude_deg: 55.4033
+  height_m: 50.0
+
+observation:
+  tracking_mode: "sidereal"     # sidereal (stars points, RSOs trail) | rate (target tracked)
+
+timing_calibration:
+  date_obs_reference: "start"   # [REQUIRED] what the camera software writes in DATE-OBS: start | mid | end
+  time_bias_ms: 0.0             # [REQUIRED] measured shutter/clock delay (see manual, Timing)
+  shutter_type: "global"        # global | rolling (CMOS)
+  readout_time_ms: 0.0          # rolling shutter only
+
+calibration:
+  master_bias_path: ""          # bias master (ADU)
+  master_dark_path: ""          # bias-subtracted dark, per second
+  master_flat_path: ""          # normalised flat, same filter as the science frames
+
+astrometry:
+  reference_catalog_dir: "data/refcat"     # filled with: sst-refcat --geo-belt
+
+tle_tracking:
+  tle_file_path: "data/tle_catalog.txt"    # filled with: sst-tle --group active
+
+output:
+  ades_contact_name: "[REQUIRED for ADES] observer name"

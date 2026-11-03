@@ -1,0 +1,15 @@
+# Equivalent to `pip install -e ".[all]"` for environments that prefer a requirements file
+astropy>=6.0
+numpy>=1.26
+scipy>=1.11
+sep>=1.2
+photutils>=1.10
+sgp4>=2.22
+astroscrappy>=1.1
+pandas>=2.0
+matplotlib>=3.8
+openpyxl>=3.1
+pyyaml>=6.0
+astroquery>=0.4.7
+pytest>=7.4
+skyfield>=1.45
